@@ -9,6 +9,7 @@ class App extends React.Component {
       name: 'Name',
       lastName: 'LastName',
       users: data,
+      search: 'frontend',
     };
   }
 
@@ -30,13 +31,30 @@ class App extends React.Component {
       });
     };
 
+    const onFilter = e => {
+      let res = e.target.value === 'all'
+        ? data.filter (value => true)
+        : data.filter (value => value.status === e.target.value);
+      this.setState ({users: res});
+    };
+
     const onDelete = id => {
       let res = this.state.users.filter (value => value.id !== id);
       this.setState ({users: res});
     };
+
     return (
       <Container>
         <h1 style={{textAlign: 'center', padding: '20px'}}>Users Table</h1>
+        <Card>
+          <select>
+            <option value="all" onClick={onFilter}>
+              All
+            </option>
+            <option onClick={onFilter} value="frontend">frontend</option>
+            <option onClick={onFilter} value="backend">backend</option>
+          </select>
+        </Card>
 
         <Card>
           <Input
@@ -83,7 +101,9 @@ class App extends React.Component {
                       <Td>{name}</Td>
                       <Td>{lastName}</Td>
                       <Td>{status}</Td>
-                      <Td><Button color="green">edit</Button></Td>
+                      <Td>
+                        <Button onClick={onEdit} color="green">edit</Button>
+                      </Td>
                       <Td>
                         <Button onClick={() => onDelete (id)} color="red">
                           delete

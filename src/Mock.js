@@ -1,7 +1,7 @@
 export const data = [
   {id: 1, name: 'Akobir', lastName: 'Ziyodullayev', status: 'frontend'},
-  {id: 2, name: 'Adiba', lastName: 'Ziyodullayeva', status: 'fontend'},
-  {id: 3, name: 'Aqida', lastName: 'Ziyodullayeva', status: 'fontend'},
+  {id: 2, name: 'Adiba', lastName: 'Ziyodullayeva', status: 'frontend'},
+  {id: 3, name: 'Aqida', lastName: 'Ziyodullayeva', status: 'frontend'},
   {id: 4, name: 'Hasan', lastName: 'Abdurahimov', status: 'backend'},
   {id: 5, name: 'Husan', lastName: 'Abdurahimov', status: 'backend'},
   {id: 6, name: 'Akbar', lastName: 'Malikov', status: 'backend'},
