@@ -6,11 +6,30 @@ class App extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
+      name: 'Name',
+      lastName: 'LastName',
       users: data,
     };
   }
 
   render () {
+    const onChange = e => {
+      this.setState ({[e.target.name]: e.target.value});
+    };
+
+    const addUser = () => {
+      let user = {
+        id: Date.now (),
+        name: this.state.name,
+        lastName: this.state.lastName,
+      };
+      this.setState ({
+        users: [...this.state.users, user],
+        name: '',
+        lastName: '',
+      });
+    };
+
     const onDelete = id => {
       let res = this.state.users.filter (value => value.id !== id);
       this.setState ({users: res});
@@ -20,9 +39,22 @@ class App extends React.Component {
         <h1 style={{textAlign: 'center', padding: '20px'}}>Users Table</h1>
 
         <Card>
-          <Input type="text" placeholder="name" />
-          <Input type="text" placeholder="lastName" />
+          <Input
+            value={this.state.name}
+            name="name"
+            onChange={onChange}
+            type="text"
+            placeholder="name"
+          />
+          <Input
+            value={this.state.lastName}
+            name="lastName"
+            onChange={onChange}
+            type="text"
+            placeholder="lastName"
+          />
           <Button
+            onClick={addUser}
             color="blue"
             style={{border: '1px solid blue', borderRadius: '5px'}}
           >
@@ -61,7 +93,7 @@ class App extends React.Component {
                   );
                 })
               : <Tr>
-                  <Td colSpan={5}>
+                  <Td colSpan={6}>
                     <h1>Hech qanday malumot yoq</h1>
                   </Td>
                 </Tr>}
