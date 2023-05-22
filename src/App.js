@@ -1,15 +1,24 @@
 import React from 'react';
 import {data} from './Mock';
-import {Container, Table, Td, Tr, Button, Input, Card} from './AppStyled';
+import {
+  Container,
+  Table,
+  Td,
+  Tr,
+  Button,
+  Input,
+  Card,
+  Select,
+} from './AppStyled';
 
 class App extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      name: 'Name',
-      lastName: 'LastName',
+      name: '',
+      lastName: '',
+      status: '',
       users: data,
-      search: 'frontend',
     };
   }
 
@@ -23,19 +32,15 @@ class App extends React.Component {
         id: Date.now (),
         name: this.state.name,
         lastName: this.state.lastName,
+        status: this.state.status,
       };
+
       this.setState ({
-        users: [...this.state.users, user],
+        users: [...data, user],
         name: '',
         lastName: '',
+        status: '',
       });
-    };
-
-    const onFilter = e => {
-      let res = e.target.value === 'all'
-        ? data.filter (value => true)
-        : data.filter (value => value.status === e.target.value);
-      this.setState ({users: res});
     };
 
     const onDelete = id => {
@@ -43,20 +48,30 @@ class App extends React.Component {
       this.setState ({users: res});
     };
 
+    const onFilter = e => {
+      // let user = {
+      //   id: Date.now (),
+      //   name: this.state.name,
+      //   lastName: this.state.lastName,
+      //   status: this.state.status,
+      // };
+
+      let res = e.target.value === 'all'
+        ? data.filter (value => true)
+        : data.filter (value => value.status === e.target.value);
+      this.setState ({users: res});
+    };
+
     return (
       <Container>
         <h1 style={{textAlign: 'center', padding: '20px'}}>Users Table</h1>
-        <Card>
-          <select>
-            <option value="all" onClick={onFilter}>
-              All
-            </option>
-            <option onClick={onFilter} value="frontend">frontend</option>
-            <option onClick={onFilter} value="backend">backend</option>
-          </select>
-        </Card>
 
         <Card>
+          <Select>
+            <option value="all" onClick={onFilter}>All</option>
+            <option onClick={onFilter} value="frontend">frontend</option>
+            <option onClick={onFilter} value="backend">backend</option>
+          </Select>
           <Input
             value={this.state.name}
             name="name"
@@ -71,6 +86,14 @@ class App extends React.Component {
             type="text"
             placeholder="lastName"
           />
+          <Input
+            value={this.state.status}
+            name="status"
+            onChange={onChange}
+            type="text"
+            placeholder="status"
+          />
+
           <Button
             onClick={addUser}
             color="blue"
@@ -102,7 +125,7 @@ class App extends React.Component {
                       <Td>{lastName}</Td>
                       <Td>{status}</Td>
                       <Td>
-                        <Button onClick={onEdit} color="green">edit</Button>
+                        <Button color="green">edit</Button>
                       </Td>
                       <Td>
                         <Button onClick={() => onDelete (id)} color="red">

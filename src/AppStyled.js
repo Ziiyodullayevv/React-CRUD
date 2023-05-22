@@ -46,6 +46,22 @@ export const Input = styled.input`
   border-radius: 5px;
 `;
 
+export const Select = styled.select`
+  padding: 10px;
+  border: 1px solid gray;
+  font-size: 1rem;
+  border-radius: 5px;
+  background: transparent;
+`;
+
+export const Option = styled.option`
+    padding: 10px;
+  border: 1px solid gray;
+  font-size: 1rem;
+  border-radius: 5px;
+  background: transparent;
+`
+
 export const Card = styled.div`
   display: flex;
   justify-content: center;
